@@ -1,80 +1,91 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 <title>For Yuktha ❤️</title>
 
 <style>
 body{
-  text-align:center;
-  font-family:Segoe UI;
-  background:linear-gradient(black,#1a001a);
-  color:white;
-  padding-top:80px;
-  overflow:hidden;
+margin:0;
+font-family:Segoe UI;
+background:black;
+color:white;
+text-align:center;
+overflow:hidden;
+}
+
+/* screens */
+.screen{
+display:none;
+padding-top:90px;
+animation:fade 1.5s;
+}
+@keyframes fade{
+from{opacity:0; transform:scale(1.1)}
+to{opacity:1; transform:scale(1)}
 }
 
 /* buttons */
 button{
-  padding:12px 25px;
-  font-size:18px;
-  border:none;
-  border-radius:12px;
-  background:#ff4da6;
-  color:white;
-  cursor:pointer;
-  transition:0.3s;
+padding:14px 28px;
+font-size:18px;
+border:none;
+border-radius:14px;
+background:linear-gradient(45deg,#ff4da6,#ff1a8c);
+color:white;
+cursor:pointer;
+box-shadow:0 0 15px #ff4da6;
+transition:.3s;
 }
 button:hover{
-  background:#ff1a8c;
-  transform:scale(1.05);
+transform:scale(1.08);
 }
 
 /* inputs */
 input{
-  padding:10px;
-  border-radius:8px;
-  border:none;
-  text-align:center;
+padding:12px;
+border-radius:10px;
+border:none;
+text-align:center;
 }
 
-/* fade */
-.fade{
-  animation:fade 1.2s;
+/* slideshow */
+#frame{
+width:260px;
+height:330px;
+margin:auto;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 0 35px #ff4da6;
 }
-@keyframes fade{
-  from{opacity:0;}
-  to{opacity:1;}
+#frame img{
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
 /* hearts */
 .heart{
-  position:fixed;
-  top:-10px;
-  font-size:22px;
-  animation:fall linear forwards;
+position:fixed;
+top:-10px;
+font-size:22px;
+animation:fall linear forwards;
 }
 @keyframes fall{
-  to{
-    transform:translateY(110vh);
-    opacity:0;
-  }
+to{
+transform:translateY(110vh);
+opacity:0;
+}
 }
 
-/* slideshow */
-#slideshow{
-  width:260px;
-  height:320px;
-  margin:30px auto;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 0 25px #ff4da6;
+/* typing text */
+#letter{
+width:80%;
+margin:auto;
+font-size:20px;
+line-height:1.6;
+min-height:150px;
 }
-#slideshow img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+
 </style>
 </head>
 
@@ -84,111 +95,153 @@ input{
 <source src="https://cdn.pixabay.com/audio/2022/10/25/audio_9464827f9a.mp3">
 </audio>
 
-<!-- PAGE 1 -->
-<div id="page1" class="fade">
-<h1>🎁 Private Birthday Access 🎁</h1>
-<p>Only one special person can unlock this 💖</p>
+<!-- INTRO SCREEN -->
+<div id="intro" class="screen" style="display:block">
+<h1>Loading Surprise...</h1>
+<p>Preparing something special 💖</p>
+</div>
 
-<input id="name" placeholder="Enter your name"><br><br>
+<!-- LOGIN -->
+<div id="login" class="screen">
+<h1>🎁 Private Access 🎁</h1>
+<p>Only Yuktha can unlock this ❤️</p>
+
+<input id="name" placeholder="Your Name"><br><br>
 <input id="pass" placeholder="Password"><br><br>
 
-<button onclick="login()">Unlock Surprise</button>
+<button onclick="checkLogin()">Unlock</button>
 </div>
 
+<!-- QUESTION -->
+<div id="quiz" class="screen">
+<h2>One question before your surprise 😌</h2>
+<h3>Who loves you the most?</h3>
 
-<!-- PAGE 2 -->
-<div id="page2" style="display:none;" class="fade">
-<h1>Wait Yuktha 😌</h1>
-<h2>One question before your surprise...</h2>
-
-<h3>Who loves you the most?</h3><br>
-
-<button onclick="showFinal()">Me ❤️</button><br><br>
-<button onclick="wrong()">Someone else</button>
+<button onclick="startStory()">Me ❤️</button><br><br>
+<button onclick="alert('Wrong answer 😝 Try again')">Someone else</button>
 </div>
 
+<!-- STORY -->
+<div id="story" class="screen">
+<h1>Our Story 💕</h1>
+<p>
+The day I met you was the day my life changed forever.  
+Every moment with you became my favorite memory.  
+You didn’t just enter my life… you became my happiness.
+</p>
 
-<!-- FINAL PAGE -->
-<div id="final" style="display:none;" class="fade">
+<br>
+<button onclick="showGallery()">Continue</button>
+</div>
 
-<h1>🎂 HAPPY BIRTHDAY YUKTHA 🎂</h1>
+<!-- GALLERY -->
+<div id="gallery" class="screen">
+<h1>Most Beautiful Girl 🌸</h1>
 
-<div id="slideshow">
+<div id="frame">
 <img id="slide" src="photo1.jpg">
 </div>
 
-<p style="font-size:20px; max-width:600px; margin:auto;">
-Out of everyone in this world, I'm the luckiest because I have you.  
-You are my happiness, my peace, and my favorite person.  
+<br>
+<button onclick="showLetter()">Next Surprise</button>
+</div>
+
+<!-- LETTER -->
+<div id="letterScreen" class="screen">
+<h1>Message For You 💌</h1>
+
+<div id="letter"></div>
+
 <br><br>
-Today isn’t just your birthday…  
-It’s the day the most beautiful soul was born 💖
-</p>
+<button onclick="finalScreen()">Final Surprise 🎉</button>
+</div>
 
-<h2 style="margin-top:30px;">I Love You Forever ❤️</h2>
+<!-- FINAL -->
+<div id="final" class="screen">
+<h1>🎂 HAPPY BIRTHDAY YUKTHA 🎂</h1>
 
+<h2>You are my happiness, my peace, my everything ❤️</h2>
+
+<h1 style="margin-top:40px">I LOVE YOU FOREVER 💖</h1>
 </div>
 
 
 <script>
 
-/* LOGIN */
-function login(){
-let n=document.getElementById("name").value.toLowerCase();
-let p=document.getElementById("pass").value.toLowerCase();
+/* screen switch */
+function show(id){
+document.querySelectorAll(".screen").forEach(s=>s.style.display="none");
+document.getElementById(id).style.display="block";
+}
+
+/* intro delay */
+setTimeout(()=>show("login"),2500);
+
+/* login */
+function checkLogin(){
+let n=name.value.toLowerCase();
+let p=pass.value.toLowerCase();
 
 if(n=="yuktha" && p=="love"){
-document.getElementById("page1").style.display="none";
-document.getElementById("page2").style.display="block";
-document.getElementById("music").play();
-}
-else{
-alert("Oops 😝 Wrong details princess");
+music.play();
+show("quiz");
+startHearts();
+}else{
+alert("Wrong details princess 😝");
 }
 }
 
-/* FINAL */
-function showFinal(){
-document.getElementById("page2").style.display="none";
-document.getElementById("final").style.display="block";
-startHearts();
+/* story */
+function startStory(){ show("story"); }
+
+/* gallery */
+function showGallery(){
+show("gallery");
 startSlideshow();
 }
 
-function wrong(){
-alert("Nope 😌 Try again Yuktha ❤️");
-}
-
-/* HEARTS */
-function startHearts(){
-setInterval(()=>{
-let heart=document.createElement("div");
-heart.className="heart";
-heart.innerHTML="💖";
-heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=(Math.random()*3+2)+"s";
-document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),5000);
-},300);
-}
-
-/* SLIDESHOW */
-let images=[
-"photo1.jpg",
-"photo2.jpg",
-"photo3.jpg",
-"photo4.jpg"
-];
-
+/* slideshow */
+let imgs=["photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg"];
 let i=0;
 function startSlideshow(){
 setInterval(()=>{
-i=(i+1)%images.length;
-document.getElementById("slide").src=images[i];
+i=(i+1)%imgs.length;
+slide.src=imgs[i];
 },2000);
 }
 
-</script>
+/* letter typing */
+function showLetter(){
+show("letterScreen");
 
+let text="Yuktha, you are the most beautiful part of my life. Every smile of yours is my happiness, every word of yours is my favorite sound. I don’t need anything else in this world as long as I have you. You are my today, my tomorrow, and my forever. ❤️";
+let index=0;
+
+let t=setInterval(()=>{
+letter.innerHTML+=text[index];
+index++;
+if(index>=text.length) clearInterval(t);
+},40);
+}
+
+/* final */
+function finalScreen(){
+show("final");
+}
+
+/* hearts */
+function startHearts(){
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+},300);
+}
+
+</script>
 </body>
 </html>
