@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>For Yuktha ❤️</title>
+
+<style>
+body{
+  text-align:center;
+  font-family:Segoe UI;
+  background:linear-gradient(black,#1a001a);
+  color:white;
+  padding-top:80px;
+  overflow:hidden;
+}
+
+/* buttons */
+button{
+  padding:12px 25px;
+  font-size:18px;
+  border:none;
+  border-radius:12px;
+  background:#ff4da6;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+button:hover{
+  background:#ff1a8c;
+  transform:scale(1.05);
+}
+
+/* inputs */
+input{
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  text-align:center;
+}
+
+/* fade */
+.fade{
+  animation:fade 1.2s;
+}
+@keyframes fade{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+/* hearts */
+.heart{
+  position:fixed;
+  top:-10px;
+  font-size:22px;
+  animation:fall linear forwards;
+}
+@keyframes fall{
+  to{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+}
+
+/* slideshow */
+#slideshow{
+  width:260px;
+  height:320px;
+  margin:30px auto;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 25px #ff4da6;
+}
+#slideshow img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/audio/2022/10/25/audio_9464827f9a.mp3">
+</audio>
+
+<!-- PAGE 1 -->
+<div id="page1" class="fade">
+<h1>🎁 Private Birthday Access 🎁</h1>
+<p>Only one special person can unlock this 💖</p>
+
+<input id="name" placeholder="Enter your name"><br><br>
+<input id="pass" placeholder="Password"><br><br>
+
+<button onclick="login()">Unlock Surprise</button>
+</div>
+
+
+<!-- PAGE 2 -->
+<div id="page2" style="display:none;" class="fade">
+<h1>Wait Yuktha 😌</h1>
+<h2>One question before your surprise...</h2>
+
+<h3>Who loves you the most?</h3><br>
+
+<button onclick="showFinal()">Me ❤️</button><br><br>
+<button onclick="wrong()">Someone else</button>
+</div>
+
+
+<!-- FINAL PAGE -->
+<div id="final" style="display:none;" class="fade">
+
+<h1>🎂 HAPPY BIRTHDAY YUKTHA 🎂</h1>
+
+<div id="slideshow">
+<img id="slide" src="photo1.jpg">
+</div>
+
+<p style="font-size:20px; max-width:600px; margin:auto;">
+Out of everyone in this world, I'm the luckiest because I have you.  
+You are my happiness, my peace, and my favorite person.  
+<br><br>
+Today isn’t just your birthday…  
+It’s the day the most beautiful soul was born 💖
+</p>
+
+<h2 style="margin-top:30px;">I Love You Forever ❤️</h2>
+
+</div>
+
+
+<script>
+
+/* LOGIN */
+function login(){
+let n=document.getElementById("name").value.toLowerCase();
+let p=document.getElementById("pass").value.toLowerCase();
+
+if(n=="yuktha" && p=="love"){
+document.getElementById("page1").style.display="none";
+document.getElementById("page2").style.display="block";
+document.getElementById("music").play();
+}
+else{
+alert("Oops 😝 Wrong details princess");
+}
+}
+
+/* FINAL */
+function showFinal(){
+document.getElementById("page2").style.display="none";
+document.getElementById("final").style.display="block";
+startHearts();
+startSlideshow();
+}
+
+function wrong(){
+alert("Nope 😌 Try again Yuktha ❤️");
+}
+
+/* HEARTS */
+function startHearts(){
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💖";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),5000);
+},300);
+}
+
+/* SLIDESHOW */
+let images=[
+"photo1.jpg",
+"photo2.jpg",
+"photo3.jpg",
+"photo4.jpg"
+];
+
+let i=0;
+function startSlideshow(){
+setInterval(()=>{
+i=(i+1)%images.length;
+document.getElementById("slide").src=images[i];
+},2000);
+}
+
+</script>
+
+</body>
+</html>
