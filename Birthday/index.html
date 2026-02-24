@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Yuktha ❤️</title>
+
+<style>
+body{
+margin:0;
+font-family:Segoe UI;
+background:linear-gradient(black,#1a001a);
+color:white;
+text-align:center;
+overflow:hidden;
+}
+
+/* screens */
+.page{
+display:none;
+padding-top:90px;
+animation:fade 1s;
+}
+
+@keyframes fade{
+from{opacity:0}
+to{opacity:1}
+}
+
+/* buttons */
+button{
+padding:14px 28px;
+font-size:18px;
+border:none;
+border-radius:12px;
+background:#ff4da6;
+color:white;
+cursor:pointer;
+}
+button:hover{
+background:#ff1a8c;
+}
+
+/* inputs */
+input{
+padding:12px;
+border-radius:10px;
+border:none;
+text-align:center;
+}
+
+/* slideshow */
+#frame{
+width:260px;
+height:330px;
+margin:auto;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 0 25px #ff4da6;
+}
+#frame img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* hearts */
+.heart{
+position:fixed;
+top:-10px;
+font-size:22px;
+animation:fall linear forwards;
+}
+@keyframes fall{
+to{
+transform:translateY(110vh);
+opacity:0;
+}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/audio/2022/10/25/audio_9464827f9a.mp3">
+</audio>
+
+<!-- INTRO -->
+<div id="intro" class="page" style="display:block">
+<h1>Loading Surprise...</h1>
+<p>Something special is coming 💖</p>
+</div>
+
+<!-- LOGIN -->
+<div id="login" class="page">
+<h1>Private Access 🎁</h1>
+<p>Only Yuktha can unlock this ❤️</p>
+
+<input id="name" placeholder="Enter your name"><br><br>
+<input id="pass" placeholder="Password"><br><br>
+
+<button onclick="login()">Unlock</button>
+</div>
+
+<!-- QUESTION -->
+<div id="q" class="page">
+<h2>One question 😌</h2>
+<h3>Who loves you the most?</h3>
+
+<button onclick="showGallery()">Me ❤️</button><br><br>
+<button onclick="alert('Wrong 😝 Try again')">Someone else</button>
+</div>
+
+<!-- GALLERY -->
+<div id="gallery" class="page">
+<h1>Most Beautiful Girl 💕</h1>
+
+<div id="frame">
+<img id="slide" src="photo1.jpg">
+</div>
+
+<br>
+<button onclick="showFinal()">Continue</button>
+</div>
+
+<!-- FINAL -->
+<div id="final" class="page">
+<h1>🎂 HAPPY BIRTHDAY YUKTHA 🎂</h1>
+
+<p style="font-size:20px; width:80%; margin:auto;">
+You are my happiness, my peace, and my favorite person.  
+I’m lucky to have you forever ❤️
+</p>
+
+<h2 style="margin-top:40px;">I LOVE YOU 💖</h2>
+</div>
+
+
+<script>
+
+/* change screen */
+function show(id){
+document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+document.getElementById(id).style.display="block";
+}
+
+/* intro delay */
+setTimeout(()=>show("login"),2000);
+
+/* login */
+function login(){
+let n=name.value.toLowerCase();
+let p=pass.value.toLowerCase();
+
+if(n=="yuktha" && p=="love"){
+music.play();
+show("q");
+startHearts();
+}else{
+alert("Wrong details princess 😝");
+}
+}
+
+/* gallery */
+function showGallery(){
+show("gallery");
+startSlide();
+}
+
+/* slideshow */
+let imgs=["photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg"];
+let i=0;
+function startSlide(){
+setInterval(()=>{
+i=(i+1)%imgs.length;
+slide.src=imgs[i];
+},2000);
+}
+
+/* final */
+function showFinal(){
+show("final");
+}
+
+/* hearts */
+function startHearts(){
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+},300);
+}
+
+</script>
+
+</body>
+</html>
